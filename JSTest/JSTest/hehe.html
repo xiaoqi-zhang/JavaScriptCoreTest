@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi"/>
+            <script>
+                //function一般放在head里面，main代码可以放在body里。（非强制）
+                function initConstructor()
+                {
+                    guoModel = new JSExportModel("郭子", "女");
+                    //Apple开发文档是这样写的：var guoModel = JSExportModel("郭子", "女")，没有写new，这是错误的，不信你可以试试。我实在这个网站https://bugs.webkit.org/attachment.cgi?id=215235&action=diff发现的这个问题。
+                    var text = guoModel.inCorporateNameAndSex(guoModel.name, guoModel.sex);
+                    document.getElementById("demo").innerHTML = text;
+                }
+                function initClassFunction()
+                {
+                    xiaoQiModel = JSExportModel.createJSExportModelWithNameSex("小琪", "男");
+                    var text = xiaoQiModel.inCorporateNameAndSex(xiaoQiModel.name, xiaoQiModel.sex);
+                    document.getElementById("demo").innerHTML = text;
+                }
+                function clearDemoText()
+                {
+                    document.getElementById("demo").innerHTML = "JSExportModel的inCorporateNameAndSex返回值";
+                }
+                function initConstructorAndPresentVC()
+                {
+                    touModel = new JSExportModel("头头", "女");
+                    //这里的vc就是一个对象
+                    vc.presentVCWithName(touModel.name);
+                }
+                calSum = function(x1, x2)
+                {
+                    return x1 + x2;
+                }
+            </script>
+    </head>
+    <body>
+        <p id="demo">JSExportModel的inCorporateNameAndSex返回值</p>
+        <button onclick="initConstructor()">调用JSExportModel的constructor</button>
+        <button onclick="initClassFunction()">调用JSExportModel的类方法</button>
+        <button onclick="initConstructorAndPresentVC()">调用JSExportModel的constructor，并且present一个ViewController</button>
+        <button onclick="clearDemoText()">还原内容</button>
+        <br>
+        <button onclick="displayGuoName('郭子')">displayGuoName</button>
+        </br>
+        <br>
+        <button onclick="calSumActive()">OC调JavaScript的方法calSum</button>
+        </br>
+        <script type="text/javascript">
+            var guoModel;
+            var xiaoQiModel;
+            var touModel;
+            var vc;
+            var calSum;
+        </script>
+    </body>
+</html>
